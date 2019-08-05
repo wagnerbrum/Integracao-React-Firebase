@@ -1,0 +1,22 @@
+.div-form{
+    display: block;
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+.input-field {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.input-field label{
+    display: inline-block;
+    margin-right: 50px;
+    width: 80px;
+}
+
+.div-form button{
+    margin-top: 50px;
+}

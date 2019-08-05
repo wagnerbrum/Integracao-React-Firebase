@@ -1,0 +1,26 @@
+.welcome-div{
+    width: 100%;
+}
+
+.welcome-title{
+    margin: 20 auto;
+    text-align: center;
+}
+
+.welcome-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-body-item{
+    display: block;
+    margin-right: 25px;
+}
+
+.welcome-body button a{
+    padding: 10px;
+    font-size: 1.2em;
+    text-decoration: none;
+}
