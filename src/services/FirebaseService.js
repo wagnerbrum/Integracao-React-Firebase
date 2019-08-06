@@ -60,12 +60,12 @@ export default class FirebaseService {
     return firebaseDatabase.ref(`${node}/${id}`).set({ ...obj });
   };
 
-  static auth_check = () => {
-    firebaseImpl.auth().onAuthStateChanged(function(user) {
+  static auth_check = callback => {
+    firebaseImpl.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("logado");
+        callback(true);
       } else {
-        console.log("não logado");
+        callback(false);
       }
     });
   };
@@ -74,11 +74,31 @@ export default class FirebaseService {
     firebaseImpl
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log("Sucess");
+      .then(() => {})
+      .catch(error => {
+        console.log(`Error Code: ${error.code}`);
+        console.log(`Error Message: ${error.message}`);
+      });
+  };
 
-        console.log("user logado");
+  static logout_user = () => {
+    firebaseImpl
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("Logout Sucess");
       })
+      .catch(error => {
+        console.log("Erros Logout");
+        console.log(error);
+      });
+  };
+
+  static login_user = (email, password) => {
+    firebaseImpl
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {})
       .catch(error => {
         console.log(`Error Code: ${error.code}`);
         console.log(`Error Message: ${error.message}`);

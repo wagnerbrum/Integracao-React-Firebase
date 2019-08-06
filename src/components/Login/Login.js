@@ -16,7 +16,9 @@ class Login extends Component {
   }
 
   componentDidMount = () => {
-    FirebaseService.auth_check();
+    FirebaseService.auth_check(user_state => {
+      this.setState({ user: user_state });
+    });
   };
 
   handleInputChange = ({ target }) => {
@@ -29,11 +31,17 @@ class Login extends Component {
     const { email, password } = this.state;
 
     console.log(email, password);
+
+    FirebaseService.login_user(email, password);
   };
 
-  render() {
-    return (
-      <div className="login-div">
+  logout = () => {
+    FirebaseService.logout_user();
+  };
+
+  check_logged = () => {
+    if (!this.state.user) {
+      return (
         <form className="login-form" onSubmit={this.submit}>
           <h2 className="login-form-title">Login</h2>
 
@@ -61,8 +69,19 @@ class Login extends Component {
 
           <button type="submit">Login</button>
         </form>
+      );
+    }
+
+    return (
+      <div>
+        <h2>Usuário já está logado...</h2>
+        <button onClick={this.logout}>Sair</button>
       </div>
     );
+  };
+
+  render() {
+    return <div className="login-div">{this.check_logged()}</div>;
   }
 }
 
