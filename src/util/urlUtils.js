@@ -3,3 +3,11 @@ export const urls = {
   list: { name: "List", path: "/list" },
   add: { name: "Add", path: "/add" }
 };
+
+export const privateUrls = {
+  edit: {
+    name: "edit",
+    path: "/edit/:id",
+    pathWithoutParam: "/edit/"
+  }
+};

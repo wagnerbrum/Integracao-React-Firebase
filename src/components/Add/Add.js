@@ -1,21 +1,34 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
+import "./Add.css";
 import FirebaseService from "../../services/FirebaseService";
 import { urls } from "../../util/urlUtils";
-import "./Add.css";
 
 class Add extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      id: null,
       temperature: "",
       humidity: "",
       client: "",
       date: ""
     };
   }
+
+  componentDidMount = () => {
+    const { id } = this.props.match.params;
+
+    if (!(id === undefined || !id)) {
+      this.setState({ id });
+
+      FirebaseService.getUniqueDataBy("leituras", id, data => {
+        this.setState({ ...data }, () => console.log(this.state));
+      });
+    }
+  };
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -26,12 +39,22 @@ class Add extends Component {
 
     const { temperature, humidity, client, date } = this.state;
 
-    const newid = FirebaseService.pushData("leituras", {
+    let objToSubmit = {
       temperature,
       humidity,
       client,
       date
-    });
+    };
+
+    if (this.props.match.params.id === undefined) {
+      FirebaseService.pushData("leituras", objToSubmit);
+    } else {
+      FirebaseService.updateData(
+        this.props.match.params.id,
+        "leituras",
+        objToSubmit
+      );
+    }
 
     this.props.history.push(urls.list.path);
   };

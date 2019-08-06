@@ -4,7 +4,7 @@ import "./App.css";
 
 import FirebaseService from "../../services/FirebaseService";
 import Datatable from "../Datatable/Datatable";
-import { urls } from "../../util/urlUtils";
+import { urls, privateUrls } from "../../util/urlUtils";
 import Navbar from "../Navbar/Navbar";
 import Welcome from "../Welcome/Welcome";
 import Add from "../Add/Add";
@@ -41,6 +41,10 @@ export default class App extends Component {
 
             <Route path={urls.add.path}>
               <Add />
+            </Route>
+
+            <Route path={privateUrls.edit.path}>
+              {props => <Add {...props} />}
             </Route>
           </Switch>
         </Router>

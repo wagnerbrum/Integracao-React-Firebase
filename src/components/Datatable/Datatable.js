@@ -1,7 +1,9 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import "./Datatable.css";
 import FirebaseService from "../../services/FirebaseService";
+import { privateUrls } from "../../util/urlUtils";
 
 const Datatable = ({ data }) => {
   const remove = id => {
@@ -31,6 +33,11 @@ const Datatable = ({ data }) => {
                 <td>{line.client}</td>
                 <td>{line.date}</td>
                 <td>
+                  <button>
+                    <Link to={privateUrls.edit.pathWithoutParam + line.key}>
+                      Edit
+                    </Link>
+                  </button>
                   <button onClick={() => remove(line.key)}>Remove</button>
                 </td>
               </tr>

@@ -27,14 +27,36 @@ export default class FirebaseService {
   };
 
   static remove = (id, node) => {
-    return firebaseDatabase
-      .ref(`${node}/${id}`)
-      .remove()
-      .then(value => {
-        console.log(`${node}/${id}`);
+    return firebaseDatabase.ref(`${node}/${id}`).remove();
+  };
+
+  static getUniqueDataBy = (node, id, callback) => {
+    const ref = firebaseDatabase.ref(`${node}/${id}`);
+    let newData = {};
+    ref
+      .once("value", dataSnapshot => {
+        if (
+          !dataSnapshot ||
+          dataSnapshot === undefined ||
+          !dataSnapshot.val() ||
+          dataSnapshot.val() === null
+        ) {
+          callback(null);
+          return;
+        }
+
+        const snap = dataSnapshot.val();
+        const keys = Object.keys(snap);
+        keys.forEach(key => {
+          newData[key] = snap[key];
+        });
       })
-      .catch(err => {
-        console.log(err);
+      .then(() => {
+        callback(newData);
       });
+  };
+
+  static updateData = (id, node, obj) => {
+    return firebaseDatabase.ref(`${node}/${id}`).set({ ...obj });
   };
 }

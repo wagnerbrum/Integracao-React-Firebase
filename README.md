@@ -4,8 +4,9 @@ Este projeto é para o aprendizado de como funciona a implementação do firebas
 
 ## Tarefas
 
-* Integrar com o Realtime Database
-** Create (Implementado)
-** Read (Implementado)
-** Update
-** Delete (Implementado)
+### Integrar com o Realtime Database
+
+#### Create (Implementado)
+#### Read (Implementado)
+#### Update (Implementado)
+#### Delete (Implementado)
