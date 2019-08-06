@@ -1,4 +1,4 @@
-import { firebaseDatabase } from "../util/firebaseUtils";
+import { firebaseDatabase, firebaseImpl } from "../util/firebaseUtils";
 
 export default class FirebaseService {
   static getDataList = (nodePath, callback, size = 10) => {
@@ -58,5 +58,30 @@ export default class FirebaseService {
 
   static updateData = (id, node, obj) => {
     return firebaseDatabase.ref(`${node}/${id}`).set({ ...obj });
+  };
+
+  static auth_check = () => {
+    firebaseImpl.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("logado");
+      } else {
+        console.log("não logado");
+      }
+    });
+  };
+
+  static create_user = (email, password) => {
+    firebaseImpl
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log("Sucess");
+
+        console.log("user logado");
+      })
+      .catch(error => {
+        console.log(`Error Code: ${error.code}`);
+        console.log(`Error Message: ${error.message}`);
+      });
   };
 }

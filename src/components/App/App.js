@@ -8,6 +8,8 @@ import { urls, privateUrls } from "../../util/urlUtils";
 import Navbar from "../Navbar/Navbar";
 import Welcome from "../Welcome/Welcome";
 import Add from "../Add/Add";
+import Login from "../Login/Login";
+import NewAccount from "../NewAccount/NewAccount";
 
 export default class App extends Component {
   constructor(props) {
@@ -18,11 +20,11 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     FirebaseService.getDataList("leituras", dataReceived => {
       this.setState({ data: dataReceived });
     });
-  }
+  };
 
   render() {
     return (
@@ -45,6 +47,14 @@ export default class App extends Component {
 
             <Route path={privateUrls.edit.path}>
               {props => <Add {...props} />}
+            </Route>
+
+            <Route path={urls.login.path}>
+              <Login />
+            </Route>
+
+            <Route path={urls.newaccount.path}>
+              <NewAccount />
             </Route>
           </Switch>
         </Router>

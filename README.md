@@ -4,9 +4,14 @@ Este projeto é para o aprendizado de como funciona a implementação do firebas
 
 ## Tarefas
 
-### Integrar com o Realtime Database
+1. Implementar a conexão com o Realtime Database
 
-#### Create (Implementado)
-#### Read (Implementado)
-#### Update (Implementado)
-#### Delete (Implementado)
+    * Create (Implementado)
+    * Read (Implementado)
+    * Update (Implementado)
+    * Delete (Implementado)
+
+2. Implementar a Autenticação
+
+    * Verificar usuário conectado (Implementado)
+    * Criar novo usuário (Implementado)
