@@ -15,3 +15,4 @@ Este projeto é para o aprendizado de como funciona a implementação do firebas
 
     * Verificar usuário conectado (Implementado)
     * Criar novo usuário (Implementado)
+    * Login (Implementado)
