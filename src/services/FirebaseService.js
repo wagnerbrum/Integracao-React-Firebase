@@ -1,6 +1,6 @@
 import { firebaseDatabase } from "../util/firebaseUtils";
 
-export default class services {
+export default class FirebaseService {
   static getDataList = (nodePath, callback, size = 10) => {
     let query = firebaseDatabase.ref(nodePath).limitToLast(size);
 
@@ -24,5 +24,17 @@ export default class services {
     ref.set(objToSubmit);
 
     return id;
+  };
+
+  static remove = (id, node) => {
+    return firebaseDatabase
+      .ref(`${node}/${id}`)
+      .remove()
+      .then(value => {
+        console.log(`${node}/${id}`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 }
